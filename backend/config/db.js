@@ -1,18 +1,13 @@
 const mysql = require("mysql2");
 
-const db = mysql.createConnection({
-  host: "db",           // Docker container name
+const pool = mysql.createPool({
+  host: "mysql",
   user: "root",
-  password: "root",
-  database: "movies_db"
+  password: "password",
+  database: "movies_db",
+  waitForConnections: true,
+  connectionLimit: 10,
 });
 
-db.connect((err) => {
-  if (err) {
-    console.error("Database connection failed:", err);
-  } else {
-    console.log("DB Connected");
-  }
-});
-
-module.exports = db;
+// Use promise wrapper (important)
+module.exports = pool.promise();

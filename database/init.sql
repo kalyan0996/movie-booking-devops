@@ -2,27 +2,28 @@ CREATE DATABASE IF NOT EXISTS movies_db;
 USE movies_db;
 
 -- Movies table
-CREATE TABLE movies (
+CREATE TABLE IF NOT EXISTS movies (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  title VARCHAR(255) NOT NULL,
-  poster TEXT,
-  show_time VARCHAR(50) NOT NULL
+  title VARCHAR(255),
+  poster TEXT
 );
 
--- Insert sample movies
-INSERT INTO movies (title, poster, show_time) VALUES
-('Inception', 'https://via.placeholder.com/300x400', '10:00 AM'),
-('Interstellar', 'https://via.placeholder.com/300x400', '2:00 PM');
+-- Clear old data (important for rebuilds)
+DELETE FROM movies;
 
--- Bookings table
-CREATE TABLE bookings (
+-- Telugu + Pawan Kalyan Movies
+INSERT INTO movies (title, poster) VALUES
+('Gabbar Singh', 'https://m.media-amazon.com/images/M/MV5BY2Q3YjQyNTUtZWE2Yi00OTVkLTk2Y2QtYzY1NjNjZjA4NDU1XkEyXkFqcGdeQXVyMTU5ODgyOTcx._V1_.jpg'),
+('Attarintiki Daredi', 'https://m.media-amazon.com/images/M/MV5BMTU5NTQxNjY3Nl5BMl5BanBnXkFtZTgwNjk1NTUyMDE@._V1_.jpg'),
+('Vakeel Saab', 'https://m.media-amazon.com/images/M/MV5BN2Y2OTUxZmQtZTQxZS00NmZlLWIyM2EtNDY5M2FlZmU1NzA2XkEyXkFqcGdeQXVyMTI1NDEyNTM5._V1_.jpg'),
+('Bheemla Nayak', 'https://m.media-amazon.com/images/M/MV5BNDg2MzQ4MTYtODk4Mi00YmM5LWI4NGEtNmU2ZmY5YzA0Y2U0XkEyXkFqcGdeQXVyMTI1NDEyNTM5._V1_.jpg'),
+('RRR', 'https://m.media-amazon.com/images/M/MV5BZjM3ZjQwYTQtZjQyZC00M2M0LTg5NTktYzQ5Y2E0ZmE4YzRlXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg');
+
+-- Bookings table (production feature)
+CREATE TABLE IF NOT EXISTS bookings (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  movie_id INT NOT NULL,
-  seats VARCHAR(255) NOT NULL,
-  total_price INT NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-  -- Foreign key (VERY IMPORTANT)
-  FOREIGN KEY (movie_id) REFERENCES movies(id)
-    ON DELETE CASCADE
+  movie_id INT,
+  seat_number VARCHAR(10),
+  show_time VARCHAR(20),
+  UNIQUE KEY unique_booking (seat_number, show_time)
 );

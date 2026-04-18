@@ -1,42 +1,221 @@
-/* App Layout */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: white;
+}
+
+/* LAYOUT */
 .app {
   display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
 }
 
-/* Header */
-.header {
+/* SIDEBAR */
+.sidebar {
+  width: 20%;
+  background: #020617;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+}
+
+.sidebar button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  background: #1e293b;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.sidebar .active {
+  background: #e11d48;
+}
+
+/* MAIN */
+.main {
+  width: 50%;
+  padding: 20px;
+}
+
+/* RIGHT PANEL */
+.right-panel {
+  width: 30%;
+  background: #020617;
+  padding: 20px;
+}
+
+/* MOVIES */
+.movie-card {
+  display: flex;
+  align-items: center;
+  background: #1e293b;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.movie-card img {
+  width: 80px;
+  height: 100px;
+}
+
+.movie-card h3 {
+  margin-left: 20px;
+}
+
+/* SCREEN */
+.screen {
+  background: linear-gradient(to right, #999, #ccc);
+  height: 20px;
+  border-radius: 20px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* SEATS */
+.seats {
+  display: grid;
+  grid-template-columns: repeat(6, 60px);
+  gap: 12px;
+  justify-content: center;
+}
+
+.seat {
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+/* TYPES */
+.vip {
+  background: #7c3aed;
+}
+
+.regular {
+  background: #1e293b;
+}
+
+.economy {
+  background: #334155;
+}
+
+/* STATES */
+.seat:hover {
+  transform: scale(1.1);
+}
+
+.selected {
+  background: #22c55e !important;
+}
+
+.booked {
+  background: gray !important;
+  cursor: not-allowed;
+}
+
+/* PANEL */
+.panel {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.summary-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  background: #111;
-  color: white;
-  padding: 15px 30px;
+  margin: 10px 0;
 }
 
-.logo {
-  font-size: 20px;
+.total {
+  font-size: 18px;
   font-weight: bold;
 }
 
-.nav span {
-  margin-left: 20px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-/* Container */
-.container {
-  flex: 1;
-  padding: 30px;
-}
-
-/* Footer */
-.footer {
-  background: #111;
-  color: #aaa;
-  text-align: center;
+.confirm {
+  margin-top: 20px;
+  width: 100%;
   padding: 10px;
+  background: #e11d48;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+/* MOVIE CARD UPGRADE */
+.movie-card {
+  display: flex;
+  gap: 15px;
+  padding: 12px;
+  background: #1e293b;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  transition: 0.2s;
+}
+
+.movie-card:hover {
+  transform: scale(1.02);
+  background: #334155;
+}
+
+.movie-card img {
+  width: 70px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.movie-info h3 {
+  margin: 0;
+}
+
+.movie-info p {
   font-size: 12px;
+  color: #94a3b8;
+}
+
+/* SCREEN STYLE */
+.screen {
+  background: linear-gradient(to right, #aaa, #fff);
+  height: 18px;
+  border-radius: 20px;
+  margin: 20px auto;
+  width: 80%;
+  text-align: center;
+  font-size: 12px;
+  color: black;
+}
+
+/* SEAT POLISH */
+.seat {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+.seat.selected {
+  box-shadow: 0 0 10px #22c55e;
+}
+
+.seat.vip {
+  background: linear-gradient(135deg, #7c3aed, #9333ea);
+}
+
+.seat.economy {
+  background: #475569;
+}
+
+/* BUTTON */
+.confirm {
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.confirm:hover {
+  background: #be123c;
 }

@@ -1,46 +1,42 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import Booking from "./Booking";
+import API from "../api/api";
 
-export default function MovieList() {
+function MovieList({ onSelect }) {
   const [movies, setMovies] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState(null);
 
-  // Fetch movies from backend
   useEffect(() => {
-    axios.get("http://localhost:5000/api/movies")
+    API.get("/movies")
       .then(res => setMovies(res.data))
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }, []);
 
-  // 👉 If user clicks "Book", show Booking screen
-  if (selectedMovie) {
-    return <Booking movie={selectedMovie} />;
-  }
-
   return (
-    <div className="movie-grid">
+    <div>
+      <h2>Movies</h2>
+
       {movies.map(movie => (
-        <div key={movie.id} className="movie-card">
+        <div
+          key={movie.id}
+          className="movie-card"
+          onClick={() => onSelect(movie)}
+        >
           <img
             src={movie.poster}
             alt={movie.title}
-            className="movie-poster"
+            onError={(e) =>
+              (e.target.src =
+                "https://via.placeholder.com/100x140?text=No+Image")
+            }
           />
 
           <div className="movie-info">
-            <div className="movie-title">{movie.title}</div>
-            <div className="movie-time">{movie.show_time}</div>
-
-            <button
-              className="book-btn"
-              onClick={() => setSelectedMovie(movie)}
-            >
-              Book Tickets
-            </button>
+            <h3>{movie.title}</h3>
+            <p>⭐ 8.5 • Action • 2h 30m</p>
           </div>
         </div>
       ))}
     </div>
   );
 }
+
+export default MovieList;
